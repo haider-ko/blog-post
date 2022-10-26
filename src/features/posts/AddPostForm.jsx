@@ -14,6 +14,7 @@ const AddPostForm = () => {
     const [title , setTitle] = useState();
     const [author , setAuthor] = useState();  //Author
     const [content , setContent] = useState();
+    const [id, setId] = useState(0);
 
     const onTitleChanged = (e) => setTitle(e.target.value)
     const onContentChanged = (e) => setContent(e.target.value)
@@ -23,12 +24,14 @@ const AddPostForm = () => {
         dispatch(addPosts({
             title,
             author,
-            content
+            content,
+            id,
 
         }))
         setTitle('');
         setAuthor('');
         setContent('');
+        setId((id)=> id + 1)
     }
 
   return (
@@ -70,7 +73,7 @@ const AddPostForm = () => {
       </Form.Item>
     </Form>
 
-    <PostsList></PostsList>
+    <PostsList id={id}></PostsList>
     </div>
   )
 }

@@ -1,15 +1,34 @@
-import { Card, Typography } from 'antd';
-import React from 'react'
+import { Card, Modal, Space, Typography } from 'antd';
+import { DeleteOutlined, EditOutlined} from '@ant-design/icons';
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { deleteposts } from './postsSlice';
+import EditPosts from './EditPosts';
 
-const PostsList = () => {
+const PostsList = ({id}) => {
   
     const posts = useSelector((state)=>state.posts.posts)
     const dispatch = useDispatch();  
 
-    const SavedPosts = posts.map((post)=>{
-        return post.content
-    })
+    const onDelete = (id) =>{
+        console.log(id)
+        dispatch(deleteposts(id))
+    }
+    
+    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
     return (
     <>
@@ -21,6 +40,7 @@ const PostsList = () => {
 
             title={post.title}
             
+            
             style={{
               width: 300,
               padding: '2px'
@@ -28,6 +48,14 @@ const PostsList = () => {
           >
             <p>by <b>{post.author}</b></p>
             <p>{post.content}</p>
+            <Space><DeleteOutlined onClick={()=>onDelete(post.id)}/>
+            <EditOutlined onClick={showModal} />
+            </Space>
+
+            <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <EditPosts id={id}></EditPosts>
+      </Modal>
+            
             
           </Card>
           <br></br>
