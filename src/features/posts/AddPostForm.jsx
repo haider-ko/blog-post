@@ -34,15 +34,6 @@ const AddPostForm = () => {
         setId((id)=> id + 1)
     }
 
-    const names = ["Mary","John","Emma"]
-const heights = [180,165,170]
-var sortPeople = function(names, heights) {
-  const sortedHeights= heights.sort((a,b)=>(a<b)? 1: (a>b));
-    console.log(sortedHeights);
-    console.log("HI")
-};
-
-
   return (
     <div>
       <Typography.Title>Add a New Post</Typography.Title>
