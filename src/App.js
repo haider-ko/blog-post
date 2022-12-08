@@ -2,7 +2,7 @@ import "./App.css";
 import Navbar from "./Layout/Navbar";
 
 function App() {
-  console.log("hi");
+  console.log("hiii");
   return (
     <>
       <Navbar></Navbar>
